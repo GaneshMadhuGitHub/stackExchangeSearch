@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="stackExchangeSearchApp">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>Stack Overflow Questions Search</title>
+  <link rel="stylesheet" href="css/stackExchangeAppStyles.css" />
+</head>
+<body>
+<div class="demo-wrapper" ng-controller="stackExchangeSearchController">
+  <header>
+      <h1>Search - Stack Exchange Questions</h1>
+  </header>
+  <div class="stackExchange-container">
+    <form id="input-form">
+      <input type="text" id="text" placeholder="Enter language name" data-ng-model="searchSring"/>
+      <input type="submit" value="Search"  data-ng-click="getAllQuestionsList()"/>
+    </form>
+    <ul class="questionBlock">
+    <span>Total Search Results - {{questionsResults.length||0}}</span>
+    <li  data-ng-repeat="question in questionsResults" id="reminder-1463867233344" class="new-item">
+        <span data-ng-class="{'isAnswered':question.is_answered}">{{question.title}}</span>
+            <div class="socialBlock">
+            <div><label>No-of Answers</label><div class="answersCount margingLeft"><span>{{question.answer_count}}</span></div></div>
+            <div><label>No-of Views</label><div class="viewersCount margingLeft"><span>{{question.view_count}}</span></div></div>
+            <div>
+                <button data-ng-disabled="{{!question.is_answered}}" class="clear-all" 
+                        data-ng-click="viewAnswersPage(question)">
+                    View Answer
+                </button>
+            </div>
+                </div>
+    </li>
+      </ul>
+  </div>
+</div>
+        <script src="js/angular.min.js"></script>
+		<script src="js/stackExchangeApp.js"></script>
+</body>
+</html>
